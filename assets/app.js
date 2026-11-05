@@ -22,7 +22,7 @@
   function card(e){
     var a=document.createElement("article");a.className="ep";
     a.innerHTML='<div class="ticket cut"><button class="thumb" aria-label="נגן: '+e[1].replace(/"/g,"&quot;")+'" data-id="'+e[0]+'"><img loading="lazy" alt="" src="'+th(e[0])+'">'+PLAY+'</button></div>'+
-      '<div class="row"><span class="big" aria-hidden="true">'+(e[2]||"+")+'</span><div><h3>'+e[1]+'</h3><span class="views">'+(e[2]?"פרק "+e[2]+" · ":"סרט מיוחד · ")+e[3]+' צפיות</span></div></div>';
+      '<div class="row"><span class="big" aria-hidden="true">'+(e[2]||"+")+'</span><div><h3><a class="tl" href="episode.html#'+e[0]+'">'+e[1]+'</a></h3><span class="views">'+(e[2]?"פרק "+e[2]+" · ":"סרט מיוחד · ")+e[3]+' צפיות</span></div></div>';
     return a;
   }
   document.addEventListener("click",function(ev){
@@ -39,12 +39,53 @@
     feat.innerHTML='<button class="thumb" data-id="'+e[0]+'" aria-label="נגן את הפרק האחרון"><img alt="" src="'+th(e[0])+'">'+PLAY+'</button>';
     $("#feat-title").textContent=e[1];$("#feat-num").textContent="הפרק האחרון · פרק "+e[2];}
   var latest=$("#latest");if(latest)D.episodes.slice(1,7).forEach(function(e){latest.appendChild(card(e))});
+  function vnum(e){var v=e[3],n=parseFloat(v);return /K/.test(v)?n*1000:n}
+  function tags(e){var t=[],s=e[1];if(/ספיישל|סרט/.test(s))t.push("special");if(/יורוטריפ|המבורג|קו ישראל|דרכונים|המסע/.test(s))t.push("trip");return t}
+  var tops=$("#top-eps");
+  if(tops)D.episodes.slice().sort(function(a,b){return vnum(b)-vnum(a)}).slice(0,3).forEach(function(e){tops.appendChild(card(e))});
   var all=$("#all");
-  if(all){var q=$("#q"),count=$("#count");
-    var render=function(){var v=(q.value||"").trim();all.innerHTML="";var n=0;
-      D.episodes.forEach(function(e){if(v&&(e[1]+" "+(e[2]||"")).indexOf(v)<0)return;all.appendChild(card(e));n++});
+  if(all){var q=$("#q"),count=$("#count"),chips=$("#chips"),mode="all";
+    var defs=[["all","הכל"],["special","ספיישלים"],["trip","מסעות"],["views","הכי נצפים"]];
+    var render=function(){var v=(q.value||"").trim();all.innerHTML="";var n=0,list=D.episodes.slice();
+      if(mode==="views")list.sort(function(a,b){return vnum(b)-vnum(a)});
+      list.forEach(function(e){if(v&&(e[1]+" "+(e[2]||"")).indexOf(v)<0)return;
+        if(mode==="special"||mode==="trip"){if(tags(e).indexOf(mode)<0)return}
+        all.appendChild(card(e));n++});
       count.textContent=n+" פרקים";if(!n)all.innerHTML='<p class="empty">לא נמצא פרק כזה. נסו מילה אחרת.</p>'};
+    defs.forEach(function(d){var b=document.createElement("button");b.className="chip";b.textContent=d[1];b.setAttribute("aria-pressed",d[0]===mode);
+      b.onclick=function(){mode=d[0];chips.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed",x===b)});render()};chips.appendChild(b)});
+    if(location.hash==="#views"){mode="views";chips.querySelectorAll(".chip").forEach(function(x,i){x.setAttribute("aria-pressed",i===3)})}
     q.addEventListener("input",render);render();}
+  /* episode page */
+  var root=$("#ep-root");
+  if(root){var draw=function(){var id=location.hash.slice(1),i=0;
+      D.episodes.forEach(function(e,k){if(e[0]===id)i=k});var e=D.episodes[i],newer=D.episodes[i-1],older=D.episodes[i+1];
+      document.title=e[1]+" · הקורבה פוד";
+      var rel=D.episodes.filter(function(x,k){return k!==i&&Math.abs(k-i)<=3}).slice(0,3);
+      root.innerHTML='<a class="back" href="episodes.html">&rarr; כל הפרקים</a><div class="ep-grid"><div class="stage"><div class="ticket cut"><div class="vid" id="ep-vid"></div></div></div><div class="ep-info"><span class="eyebrow">'+(e[2]?"פרק "+e[2]:"סרט מיוחד")+'</span><h1></h1><p class="views">'+e[3]+' צפיות ביוטיוב</p><div class="cta"><a class="btn" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+e[0]+'">לצפייה ביוטיוב</a><a class="btn ghost" target="_blank" rel="noopener" href="'+D.spotify+'">האזנה בספוטיפיי</a></div><div class="pn"></div></div></div><h2 class="more-h">עוד פרקים</h2><div class="grid3" id="rel"></div>';
+      $("h1",root).textContent=e[1];
+      $("#ep-vid").innerHTML='<button class="thumb" data-id="'+e[0]+'" aria-label="נגן"><img alt="" src="'+th(e[0])+'">'+PLAY+'</button>';
+      var pn=$(".pn",root);
+      if(older)pn.innerHTML+='<a class="pnl" href="episode.html#'+older[0]+'"><small>הפרק הקודם</small>'+older[1]+'</a>';
+      if(newer)pn.innerHTML+='<a class="pnl" href="episode.html#'+newer[0]+'"><small>הפרק הבא</small>'+newer[1]+'</a>';
+      rel.forEach(function(x){$("#rel").appendChild(card(x))});window.scrollTo(0,0)};
+    addEventListener("hashchange",draw);draw();}
+  /* lexicon */
+  function term(t){var d=document.createElement("article");d.className="term cut";d.innerHTML='<span class="ini" aria-hidden="true"></span><h3></h3><p></p>';
+    $(".ini",d).textContent=t[0].charAt(0);$("h3",d).textContent=t[0];$("p",d).textContent=t[1];return d}
+  var th0=$("#terms-home");if(th0)D.lexicon.slice(0,3).forEach(function(t){th0.appendChild(term(t))});
+  var tl=$("#terms");
+  if(tl){var lq=$("#lq"),lc=$("#lcount");var rl=function(){var v=lq.value.trim();tl.innerHTML="";var n=0;
+      D.lexicon.forEach(function(t){if(v&&(t[0]+t[1]).indexOf(v)<0)return;tl.appendChild(term(t));n++});lc.textContent=n+" מונחים";if(!n)tl.innerHTML='<p class="empty">המונח הזה עוד לא במילון.</p>'};
+    lq.addEventListener("input",rl);rl();}
+  /* menu, back to top, count-up */
+  var mb=$(".menu"),nv=$("#nav");
+  if(mb)mb.addEventListener("click",function(){var o=nv.classList.toggle("open");mb.setAttribute("aria-expanded",o)});
+  var tt=$(".totop");
+  if(tt){addEventListener("scroll",function(){tt.hidden=scrollY<700},{passive:true});tt.onclick=function(){scrollTo({top:0,behavior:"smooth"})}}
+  var se=$("#stat-eps");
+  if(se&&"IntersectionObserver" in window){var tn=+se.textContent,io=new IntersectionObserver(function(en){if(!en[0].isIntersecting)return;io.disconnect();
+      var t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/900);se.textContent=Math.round(tn*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)});io.observe(se)}
   var hosts=$("#hosts");
   if(hosts)D.hosts.forEach(function(h,i){var d=document.createElement("div");d.className="host cut";
     d.innerHTML='<span class="n" aria-hidden="true">'+(i+1)+'</span><svg class="av" viewBox="0 0 92 92" aria-hidden="true"><defs><linearGradient id="g'+i+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5C8DFF"/><stop offset="1" stop-color="#1B3BA8"/></linearGradient></defs><circle cx="46" cy="46" r="44" fill="url(#g'+i+')"/><path d="M6 60c20 14 60 14 80 0M8 70c22 14 54 14 76 0" stroke="#fff" stroke-opacity=".35" stroke-width="6" fill="none"/><text x="46" y="60" text-anchor="middle" font-family="Karantina,Heebo,sans-serif" font-size="52" font-weight="700" fill="#fff">'+h.initial+'</text></svg><h3>'+h.name+'</h3><p>'+h.role+'</p>';hosts.appendChild(d)});
@@ -65,7 +106,7 @@
     out+='<defs><radialGradient id="gl"><stop offset="0" stop-color="#9EC0FF" stop-opacity=".95"/><stop offset=".4" stop-color="#2F6BFF" stop-opacity=".5"/><stop offset="1" stop-color="#2F6BFF" stop-opacity="0"/></radialGradient><filter id="bl"><feGaussianBlur stdDeviation="9"/></filter><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A1233"/><stop offset="1" stop-color="#040816"/></linearGradient></defs>';
     var fl=[160,430,720,980,1100];
     fl.forEach(function(x,i){out+='<circle class="glow" style="animation-delay:'+(i*.4)+'s" cx="'+x+'" cy="78" r="70" fill="url(#gl)"/><ellipse class="smoke" style="animation-delay:'+(i*.7)+'s" cx="'+x+'" cy="40" rx="60" ry="30" fill="#5C8DFF" opacity=".25" filter="url(#bl)"/>'});
-    for(var row=0;row<5;row++){var y=110+row*18,col=['#0E1A4A','#0B1540','#09123A','#070E2C','#050A1E'][row];
+    for(var row=0;row<5;row++){var y=110+row*18,col=['#1B2F82','#152768','#101F55','#0A1540','#050A1E'][row];
       out+='<rect x="0" y="'+(y+8)+'" width="'+W+'" height="'+(H-y)+'" fill="'+col+'"/>';
       for(var x=(row%2)*9;x<W;x+=18+r()*6){var hh=y-6-r()*5;
         out+='<circle cx="'+x.toFixed(1)+'" cy="'+hh.toFixed(1)+'" r="7" fill="'+col+'"/><rect x="'+(x-8).toFixed(1)+'" y="'+(hh+5).toFixed(1)+'" width="16" height="22" rx="7" fill="'+col+'"/>';
