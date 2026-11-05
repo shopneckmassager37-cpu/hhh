@@ -13,10 +13,6 @@
   '<symbol id="i-spot" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="24" r="19"/><path d="M13 18c8-3 16-2 22 2M15 25c6-2 13-1 18 2M16 32c5-1 10-1 14 1"/></g></symbol>'+
   '<symbol id="i-apple" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="24" r="19"/><circle cx="24" cy="20" r="4"/><path d="M24 26v10M19 36h10"/></g></symbol>'+
   '<symbol id="i-rss" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="11" cy="37" r="3" fill="currentColor"/><path d="M8 22c10 0 18 8 18 18M8 9c18 0 31 13 31 31"/></g></symbol>'+
-  '<symbol id="i-quiz" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="32" r="25"/><path d="M24 25c0-5 4-8 8-8s8 3 8 8c0 6-8 6-8 12"/><circle cx="32" cy="46" r="1.5" fill="currentColor"/></g></symbol>'+
-  '<symbol id="i-paint" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="6" y="10" width="52" height="44"/><path d="M6 24h52M6 38h52M23 10v44M41 10v44"/><rect x="23" y="24" width="18" height="14" fill="currentColor"/></g></symbol>'+
-  '<symbol id="i-bingo" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="52" height="52"/><path d="M6 23h52M6 40h52M23 6v52M40 6v52M27 31l4 4 8-9"/></g></symbol>'+
-  '<symbol id="i-cards" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="6" y="10" width="22" height="30" rx="3"/><rect x="36" y="24" width="22" height="30" rx="3"/><circle cx="47" cy="39" r="5"/></g></symbol>'+
   '</defs></svg>';
   document.body.insertAdjacentHTML("afterbegin",SPRITE);
   function ic(id){return '<svg aria-hidden="true"><use href="#'+id+'"/></svg>'}
@@ -62,7 +58,7 @@
   document.querySelectorAll("[data-ic]").forEach(function(n){n.innerHTML=ic(n.getAttribute("data-ic"))+n.innerHTML});
   var st=$("#stat-eps");if(st)st.textContent=D.episodes[0][2];
   var fact=$("#fact");
-  if(fact){var f=D.quiz[Math.floor(Date.now()/864e5)%D.quiz.length];fact.textContent=f.e}
+  if(fact){fact.textContent=D.facts[Math.floor(Date.now()/864e5)%D.facts.length]}
   /* crowd silhouette */
   var cr=$("#crowd");
   if(cr){var W=1200,H=200,out='',seed=7;function r(){seed=(seed*9301+49297)%233280;return seed/233280}
