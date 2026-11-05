@@ -2,49 +2,68 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#040816">
 <title>הקורבה פוד</title>
-<meta name="description" content="פודקאסט בכחול לבן על תרבות אוהדים, אולטראס והיציע. כל הפרקים, בלוג והמגישים.">
+<meta name="description" content="פודקאסט בכחול לבן על תרבות אוהדים, אולטראס והיציע. פרקים, משחקים, בלוג והמגישים.">
 <meta property="og:title" content="הקורבה פוד">
-<meta property="og:description" content="פודקאסט בכחול לבן על תרבות אוהדים, אולטראס והיציע. כל הפרקים, בלוג והמגישים.">
+<meta property="og:description" content="פודקאסט בכחול לבן על תרבות אוהדים, אולטראס והיציע. פרקים, משחקים, בלוג והמגישים.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Heebo:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Heebo:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <header class="top"><div class="w">
-<a class="logo" href="index.html"><b>הקורבה פוד</b><small>THE CURVA POD</small></a>
+<a class="logo" href="index.html" aria-label="הקורבה פוד, עמוד הבית">
+<svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" fill="#2F6BFF"/><path d="M6 36C6 18 16 10 24 10s18 8 18 26" fill="none" stroke="#fff" stroke-width="3.5"/><path d="M12 36c0-11 6-17 12-17s12 6 12 17" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3.5"/><circle cx="24" cy="36" r="4" fill="#fff"/></svg>
+<span><b>הקורבה פוד</b><small>THE CURVA POD</small></span></a>
 <nav aria-label="ראשי">
-<a href="index.html" aria-current="page">בית</a><a href="episodes.html">פרקים</a><a href="blog.html">בלוג</a><a href="index.html#about">המגישים</a><a href="index.html#listen">האזנה</a>
+<a href="index.html" aria-current="page">בית</a><a href="episodes.html">פרקים</a><a href="games.html">משחקים</a><a href="blog.html">בלוג</a><a href="index.html#about">המגישים</a><a href="index.html#listen">האזנה</a>
 </nav></div></header>
 <main>
-<section class="hero"><div class="w">
+<section class="hero"><svg class="pitch" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#2F6BFF" stroke-opacity=".35" stroke-width="2" aria-hidden="true"><rect x="40" y="20" width="720" height="360"/><path d="M400 20v360"/><circle cx="400" cy="200" r="60"/><rect x="40" y="110" width="110" height="180"/><rect x="650" y="110" width="110" height="180"/><path d="M150 160a50 50 0 0 1 0 80M650 160a50 50 0 0 0 0 80"/></svg><div class="w">
 <div><span class="eyebrow">פודקאסט בכחול לבן</span>
-<h1>הכדורגל <span>מהיציע</span></h1>
+<h1>הכדורגל<br><span class="o">מהיציע</span></h1>
 <p class="lead">תרבות אוהדים, אולטראס, מסעות ויציעים. מוגש על ידי אנשים שתשמחו לשתות איתם בירה ביציע.</p>
-<div class="cta"><a class="btn" href="#listen">להאזנה</a><a class="btn ghost" href="episodes.html">כל הפרקים</a></div></div>
-<div class="stage"><div class="vid" id="featured"></div><div class="cap"><span class="eyebrow">הפרק האחרון</span><b id="feat-title"></b></div></div>
-</div></section>
+<div class="cta"><a class="btn" href="#listen">להאזנה</a><a class="btn ghost" href="games.html">למשחקים</a></div></div>
+<div class="stage"><div class="ticket cut"><div class="vid" id="featured"></div></div><div class="cap"><span class="eyebrow" id="feat-num"></span><b id="feat-title"></b></div></div>
+</div><svg class="crowd" id="crowd" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg></section>
 <div class="ticker" id="ticker" aria-hidden="true"></div>
+<div class="w"><div class="stats">
+<div class="stat"><b id="stat-eps">98</b><span>פרקים בערוץ</span></div>
+<div class="stat"><b>3</b><span>מגישים באולפן</span></div>
+<div class="stat"><b>4.9</b><span>דירוג באפל פודקאסטס</span></div>
+<div class="stat"><b>4</b><span>משחקים באתר</span></div>
+</div></div>
 <section class="s"><div class="w">
 <div class="head"><div class="l"><span class="eyebrow">פרקים אחרונים</span><h2>מה שפספסתם</h2></div><a class="btn ghost" href="episodes.html">לכל הפרקים</a></div>
 <div class="grid3" id="latest"></div></div></section>
+<svg class="scarf" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="sp" width="120" height="30" patternUnits="userSpaceOnUse"><rect width="120" height="30" fill="#2F6BFF"/><rect width="40" height="30" fill="#fff"/><rect x="80" width="40" height="30" fill="#0A1233"/></pattern></defs><rect width="1200" height="30" fill="url(#sp)"/><g stroke="#fff" stroke-width="2" opacity=".8"><path d="M6 30v14"/><path d="M18 30v14"/><path d="M30 30v14"/><path d="M42 30v14"/><path d="M54 30v14"/><path d="M66 30v14"/><path d="M78 30v14"/><path d="M90 30v14"/><path d="M102 30v14"/><path d="M114 30v14"/><path d="M126 30v14"/><path d="M138 30v14"/><path d="M150 30v14"/><path d="M162 30v14"/><path d="M174 30v14"/><path d="M186 30v14"/><path d="M198 30v14"/><path d="M210 30v14"/><path d="M222 30v14"/><path d="M234 30v14"/><path d="M246 30v14"/><path d="M258 30v14"/><path d="M270 30v14"/><path d="M282 30v14"/><path d="M294 30v14"/><path d="M306 30v14"/><path d="M318 30v14"/><path d="M330 30v14"/><path d="M342 30v14"/><path d="M354 30v14"/><path d="M366 30v14"/><path d="M378 30v14"/><path d="M390 30v14"/><path d="M402 30v14"/><path d="M414 30v14"/><path d="M426 30v14"/><path d="M438 30v14"/><path d="M450 30v14"/><path d="M462 30v14"/><path d="M474 30v14"/><path d="M486 30v14"/><path d="M498 30v14"/><path d="M510 30v14"/><path d="M522 30v14"/><path d="M534 30v14"/><path d="M546 30v14"/><path d="M558 30v14"/><path d="M570 30v14"/><path d="M582 30v14"/><path d="M594 30v14"/><path d="M606 30v14"/><path d="M618 30v14"/><path d="M630 30v14"/><path d="M642 30v14"/><path d="M654 30v14"/><path d="M666 30v14"/><path d="M678 30v14"/><path d="M690 30v14"/><path d="M702 30v14"/><path d="M714 30v14"/><path d="M726 30v14"/><path d="M738 30v14"/><path d="M750 30v14"/><path d="M762 30v14"/><path d="M774 30v14"/><path d="M786 30v14"/><path d="M798 30v14"/><path d="M810 30v14"/><path d="M822 30v14"/><path d="M834 30v14"/><path d="M846 30v14"/><path d="M858 30v14"/><path d="M870 30v14"/><path d="M882 30v14"/><path d="M894 30v14"/><path d="M906 30v14"/><path d="M918 30v14"/><path d="M930 30v14"/><path d="M942 30v14"/><path d="M954 30v14"/><path d="M966 30v14"/><path d="M978 30v14"/><path d="M990 30v14"/><path d="M1002 30v14"/><path d="M1014 30v14"/><path d="M1026 30v14"/><path d="M1038 30v14"/><path d="M1050 30v14"/><path d="M1062 30v14"/><path d="M1074 30v14"/><path d="M1086 30v14"/><path d="M1098 30v14"/><path d="M1110 30v14"/><path d="M1122 30v14"/><path d="M1134 30v14"/><path d="M1146 30v14"/><path d="M1158 30v14"/><path d="M1170 30v14"/><path d="M1182 30v14"/><path d="M1194 30v14"/></g></svg>
+<section class="s" id="games"><div class="w">
+<div class="head"><div class="l"><span class="eyebrow">משחקים</span><h2>מחכים לשריקה?</h2></div><a class="btn ghost" href="games.html">לכל המשחקים</a></div>
+<div class="gcards">
+<a class="gc cut" href="games.html#quiz"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-quiz"/></svg><h3>חידון יציע</h3><p>עשר שאלות על תרבות אוהדים וכדורגל. כמה אתם יודעים?</p><span class="go">למשחק &larr;</span></a>
+<a class="gc cut" href="games.html#tifo"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-paint"/></svg><h3>צייר טיפו</h3><p>תכננו קוריאוגרפיה על רשת, עם סימטריה, ושמרו כתמונה.</p><span class="go">למשחק &larr;</span></a>
+<a class="gc cut" href="games.html#bingo"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-bingo"/></svg><h3>בינגו יציע</h3><p>כרטיס חדש בכל משחק. סמנו מה קרה ביציע.</p><span class="go">למשחק &larr;</span></a>
+<a class="gc cut" href="games.html#memory"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-cards"/></svg><h3>זיכרון</h3><p>מצאו זוגות של צעיפים, תופים, דגלים וגביעים.</p><span class="go">למשחק &larr;</span></a>
+</div></div></section>
 <section class="s band" id="listen"><div class="w">
 <div class="head"><div class="l"><span class="eyebrow">האזנה</span><h2>איפה שנוח לכם</h2></div></div>
 <div class="platforms">
-<a class="pl" data-link="channelUrl" href="" target="_blank" rel="noopener"><span>YouTube<small>וידאו מלא</small></span><span class="arr">&larr;</span></a>
-<a class="pl" data-link="spotify" href="" target="_blank" rel="noopener"><span>Spotify<small>אודיו</small></span><span class="arr">&larr;</span></a>
-<a class="pl" data-link="apple" href="" target="_blank" rel="noopener"><span>Apple Podcasts<small>אודיו</small></span><span class="arr">&larr;</span></a>
-<div class="pl"><span>פיד RSS<small>לכל אפליקציית פודקאסטים</small></span><button class="btn ghost" data-copy="">העתקת RSS</button></div>
+<a class="pl cut" data-link="channelUrl" href="" target="_blank" rel="noopener"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-yt"/></svg><span>YouTube<small>וידאו מלא</small></span></a>
+<a class="pl cut" data-link="spotify" href="" target="_blank" rel="noopener"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-spot"/></svg><span>Spotify<small>אודיו</small></span></a>
+<a class="pl cut" data-link="apple" href="" target="_blank" rel="noopener"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-apple"/></svg><span>Apple Podcasts<small>אודיו</small></span></a>
+<div class="pl cut"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-rss"/></svg><span>פיד RSS<small>לכל אפליקציה</small></span><button class="btn ghost" data-copy="">העתקת RSS</button></div>
 </div></div></section>
 <section class="s" id="about"><div class="w">
 <div class="head"><div class="l"><span class="eyebrow">המגישים</span><h2>מי יושב באולפן</h2></div></div>
 <div class="hosts" id="hosts"></div></div></section>
+<section class="s"><div class="w"><div class="fact cut"><span class="q" aria-hidden="true">?</span><div><span class="eyebrow">הידעת</span><h3 id="fact" style="margin-top:10px"></h3></div></div></div></section>
 <section class="s band"><div class="w">
 <div class="head"><div class="l"><span class="eyebrow">בלוג</span><h2>מחוץ לפרק</h2></div><a class="btn ghost" href="blog.html">לבלוג</a></div>
 <div class="posts" id="posts"></div></div></section>
-<section class="s"><div class="w"><div class="sponsor"><div><span class="eyebrow">חסות</span><h3 style="margin-top:6px">מקום לחסות גלויה</h3><p>הפודקאסט עצמאי וחי מתמיכת חסויות. כאן יופיע כרטיס שקוף עם גילוי נאות.</p></div><a class="btn ghost" href="#">פרטים</a></div></div></section>
+<section class="s"><div class="w"><div class="sponsor cut"><div><span class="eyebrow">חסות</span><h3 style="margin-top:8px">מקום לחסות גלויה</h3><p>הפודקאסט עצמאי וחי מתמיכת חסויות. כאן יופיע כרטיס שקוף עם גילוי נאות.</p></div><a class="btn ghost" href="#">פרטים</a></div></div></section>
 </main>
 <footer><div class="w"><span>אתר דוגמה בלתי רשמי. הפרקים והתמונות שייכים לקורבה פוד.</span><a href="" data-link="channelUrl" target="_blank" rel="noopener">הערוץ ביוטיוב</a></div></footer>
 <script src="assets/data.js"></script><script src="assets/app.js"></script>
